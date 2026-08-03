@@ -5,6 +5,7 @@ public class VehicleRentalSystem{
         boolean running = true;
         String border = "-".repeat(40);
         while (running) {
+            System.out.println();
             System.out.println(border);
             System.out.println("VEHICLE RENTAL MANAGEMENT SYSTEM");
             System.out.println(border);

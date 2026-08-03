@@ -29,7 +29,7 @@ public class UserInterface{
         }
 
         String model = validator.getValidatedString(
-            "Enter Model ", 
+            "Enter Model: ", 
             "\\S.+", 
             "Model cannot be empty.");
 
@@ -76,6 +76,10 @@ public class UserInterface{
     public static void rentVehicle(){
         if(rentalFunctions.getAllVehicles().isEmpty()){
             System.out.println("No vehicles registered yet.");
+            return;
+        }
+        if(rentalFunctions.getAvailableVehicles().isEmpty()){
+            System.out.println("No vehicles available for rent.");
             return;
         }
         String plateNumber = validator.getValidatedString(

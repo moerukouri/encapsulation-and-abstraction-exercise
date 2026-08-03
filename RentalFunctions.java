@@ -89,4 +89,14 @@ public class RentalFunctions{
     public List<Vehicle> getRentalRecords() {
         return rentalRecords;
     }
+
+    public List<Vehicle> getAvailableVehicles() {
+        List<Vehicle> availableVehicles = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.isAvailable()) {
+                availableVehicles.add(vehicle);
+            }
+        }
+        return availableVehicles;
+    }
 }

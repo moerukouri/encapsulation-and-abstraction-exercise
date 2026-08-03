@@ -74,6 +74,10 @@ public class UserInterface{
     }
 
     public static void rentVehicle(){
+        if(rentalFunctions.getAllVehicles().isEmpty()){
+            System.out.println("No vehicles registered yet.");
+            return;
+        }
         String plateNumber = validator.getValidatedString(
             "Enter Plate Number: ", 
             "^[A-Za-z0-9]+",
@@ -96,6 +100,10 @@ public class UserInterface{
     }
 
     public static void returnVehicle(){
+        if(rentalFunctions.getRentalRecords().isEmpty()){
+            System.out.println("No vehicles are currently rented.");
+            return;
+        }
         String plateNumber = validator.getValidatedString(
             "Enter Plate Number: ", 
             "^[A-Za-z0-9]+",

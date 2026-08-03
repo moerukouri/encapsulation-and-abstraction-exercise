@@ -20,22 +20,22 @@ public class InputValidator {
     }
 
     public String getValidatedPositiveInteger(String prompt, String errorMsg){
-        System.out.println(prompt);
+        System.out.print(prompt);
         String input = sc.nextLine().trim();
         while(!isValidPositiveInteger(input)){
             System.out.println(errorMsg);
-            System.out.println(prompt);
+            System.out.print(prompt);
             input = sc.nextLine().trim();
         }
         return input;
     }
 
     public String getValidatedPositiveDecimal(String prompt, String errorMsg){
-        System.out.println(prompt);
+        System.out.print(prompt);
         String input = sc.nextLine().trim();
         while(!isValidPositiveDecimal(input)){
             System.out.println(errorMsg);
-            System.out.println(prompt);
+            System.out.print(prompt);
             input = sc.nextLine().trim();
         }
         return input;

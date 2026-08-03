@@ -2,6 +2,7 @@ import java.util.*;
 
 public class RentalFunctions{
     private final List<Vehicle> vehicles = new ArrayList<>();
+    private final List<Vehicle> rentalRecords = new ArrayList<>();
 
     public boolean isDuplicatePlate(String plateNumber){return findVehicle(plateNumber) != null;}
 
@@ -60,6 +61,7 @@ public class RentalFunctions{
             return RentResult.NOT_AVAILABLE;
         }
         vehicle.setAvailability(false);
+        rentalRecords.add(vehicle);
         return RentResult.SUCCESS;
     }
 
@@ -76,10 +78,15 @@ public class RentalFunctions{
             return ReturnResult.NOT_RENTED;
         }
         vehicle.setAvailability(true);
+        rentalRecords.remove(vehicle);
         return ReturnResult.SUCCESS;
     }
 
     public static String formatPesos(double amount){
         return String.format("₱%,.2f", amount);
+    }
+
+    public List<Vehicle> getRentalRecords() {
+        return rentalRecords;
     }
 }

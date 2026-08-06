@@ -16,5 +16,5 @@ public class Van extends Vehicle {
     public double calculateRentalCost(int days){return (getRate() * days) + DRIVER_FEE;}
 
     @Override
-    public String getAdditionalDetail(){return cargoCapacity + "kg";}
+    public String getAdditionalDetail(){return cargoCapacity + " kg";}
 }

@@ -1,6 +1,6 @@
 public class UserInterface{
     private static final RentalFunctions rentalFunctions = new RentalFunctions();
-    private static final InputValidator validator = new InputValidator();
+    private static final InputValidator validator = VehicleRentalSystem.validator;
 
     public void addVehicle(){
         System.out.println("""

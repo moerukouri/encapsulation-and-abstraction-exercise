@@ -3,6 +3,10 @@ import java.util.*;
 public class RentalFunctions{
     private final List<Vehicle> vehicles = new ArrayList<>();
     private final List<Vehicle> rentalRecords = new ArrayList<>();
+    public static final int SUCCESS = 0;
+    public static final int NOT_FOUND = 1;
+    public static final int NOT_AVAILABLE = 2;
+    public static final int NOT_RENTED = 2;
 
     public boolean isDuplicatePlate(String plateNumber){return findVehicle(plateNumber) != null;}
 
@@ -48,38 +52,30 @@ public class RentalFunctions{
         }
     }
 
-    public enum RentResult{
-        SUCCESS, NOT_FOUND, NOT_AVAILABLE
-    }
-
-    public RentResult rentVehicle(String plateNumber, int days){
+    public int rentVehicle(String plateNumber, int days){
         Vehicle vehicle = findVehicle(plateNumber);
         if (vehicle == null) {
-            return RentResult.NOT_FOUND;
+            return NOT_FOUND;
         }
         if (!vehicle.isAvailable()){
-            return RentResult.NOT_AVAILABLE;
+            return NOT_AVAILABLE;
         }
         vehicle.setAvailability(false);
         rentalRecords.add(vehicle);
-        return RentResult.SUCCESS;
+        return SUCCESS;
     }
 
-    public enum ReturnResult{
-        SUCCESS, NOT_FOUND, NOT_RENTED
-    }
-
-    public ReturnResult returnVehicle(String plateNumber){
+    public int returnVehicle(String plateNumber){
         Vehicle vehicle = findVehicle(plateNumber);
         if (vehicle == null) {
-            return ReturnResult.NOT_FOUND;
+            return NOT_FOUND;
         }
         if (vehicle.isAvailable()){
-            return ReturnResult.NOT_RENTED;
+            return NOT_RENTED;
         }
         vehicle.setAvailability(true);
         rentalRecords.remove(vehicle);
-        return ReturnResult.SUCCESS;
+        return SUCCESS;
     }
 
     public static String formatPesos(double amount){

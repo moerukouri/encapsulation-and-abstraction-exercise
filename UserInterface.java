@@ -90,16 +90,16 @@ public class UserInterface{
             "Enter Number of Rental Days: ",
             "Invalid number of days. Enter a positive whole number."));
 
-        RentalFunctions.RentResult result = rentalFunctions.rentVehicle(plateNumber, days);
+        int result = rentalFunctions.rentVehicle(plateNumber, days);
 
         switch(result){
-            case SUCCESS -> {
+            case 0 -> {
                 Vehicle vehicle = rentalFunctions.findVehicle(plateNumber);
                 double cost = vehicle.calculateRentalCost(days);
                 System.out.println("Total rental cost: " + RentalFunctions.formatPesos(cost));
             }
-            case NOT_AVAILABLE -> System.out.println("Vehicle not available!");
-            case NOT_FOUND -> System.out.println("Vehicle not found!");
+            case 1 -> System.out.println("Vehicle not found!");
+            case 2 -> System.out.println("Vehicle not available!");
         }
     }
 
@@ -113,12 +113,12 @@ public class UserInterface{
             "^[A-Za-z0-9]+",
             "Invalid plate number. Enter letters or numbers only, no spaces.");
 
-        RentalFunctions.ReturnResult result = rentalFunctions.returnVehicle(plateNumber);
+        int result = rentalFunctions.returnVehicle(plateNumber);
 
         switch(result){
-            case SUCCESS -> System.out.println("Vehicle returned successfully!");
-            case NOT_RENTED -> System.out.println("Vehicle was not rented.");
-            case NOT_FOUND -> System.out.println("Vehicle not found!");
+            case 0 -> System.out.println("Vehicle returned successfully!");
+            case 1 -> System.out.println("Vehicle not found!");
+            case 2 -> System.out.println("Vehicle was not rented.");
         }
     }
 }

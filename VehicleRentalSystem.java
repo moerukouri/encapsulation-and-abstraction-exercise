@@ -1,5 +1,6 @@
 public class VehicleRentalSystem{
     static final InputValidator validator = new InputValidator();
+    static final UserInterface userInterface = new UserInterface();
 
     public static void main(String[] args) {
         boolean running = true;
@@ -19,10 +20,10 @@ public class VehicleRentalSystem{
             int choice = validator.getValidatedChoice(1, 5);
 
             switch (choice) {
-                case 1 -> UserInterface.addVehicle();
-                case 2 -> UserInterface.viewAllVehicles();
-                case 3 -> UserInterface.rentVehicle();
-                case 4 -> UserInterface.returnVehicle();
+                case 1 -> userInterface.addVehicle();
+                case 2 -> userInterface.viewAllVehicles();
+                case 3 -> userInterface.rentVehicle();
+                case 4 -> userInterface.returnVehicle();
                 case 5 -> running = false;
                 default -> {
                 }

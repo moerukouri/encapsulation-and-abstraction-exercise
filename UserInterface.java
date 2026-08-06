@@ -2,7 +2,7 @@ public class UserInterface{
     private static final RentalFunctions rentalFunctions = new RentalFunctions();
     private static final InputValidator validator = new InputValidator();
 
-    public static void addVehicle(){
+    public void addVehicle(){
         System.out.println("""
                 Select vehicle type:
                 1. Car
@@ -68,17 +68,17 @@ public class UserInterface{
         System.out.println("Vehicle added successfully!");
     }
 
-    public static void viewAllVehicles(){
+    public void viewAllVehicles(){
         System.out.println();
         rentalFunctions.printAllVehicles();
     }
 
-    public static void rentVehicle(){
+    public void rentVehicle(){
         if(rentalFunctions.getAllVehicles().isEmpty()){
             System.out.println("No vehicles registered yet.");
             return;
         }
-        if(rentalFunctions.getAvailableVehicles().isEmpty()){
+        if(rentalFunctions.getAvailableVehicles(false).isEmpty()){
             System.out.println("No vehicles available for rent.");
             return;
         }
@@ -90,21 +90,21 @@ public class UserInterface{
             "Enter Number of Rental Days: ",
             "Invalid number of days. Enter a positive whole number."));
 
-        int result = rentalFunctions.rentVehicle(plateNumber, days);
+        int result = rentalFunctions.rentVehicle(plateNumber);
 
         switch(result){
-            case 0 -> {
+            case RentalFunctions.SUCCESS -> {
                 Vehicle vehicle = rentalFunctions.findVehicle(plateNumber);
                 double cost = vehicle.calculateRentalCost(days);
                 System.out.println("Total rental cost: " + RentalFunctions.formatPesos(cost));
             }
-            case 1 -> System.out.println("Vehicle not found!");
-            case 2 -> System.out.println("Vehicle not available!");
+            case RentalFunctions.NOT_FOUND -> System.out.println("Vehicle not found!");
+            case RentalFunctions.NOT_AVAILABLE -> System.out.println("Vehicle not available!");
         }
     }
 
-    public static void returnVehicle(){
-        if(rentalFunctions.getRentalRecords().isEmpty()){
+    public void returnVehicle(){
+        if(rentalFunctions.getAvailableVehicles(true).isEmpty()){
             System.out.println("No vehicles are currently rented.");
             return;
         }
@@ -116,9 +116,9 @@ public class UserInterface{
         int result = rentalFunctions.returnVehicle(plateNumber);
 
         switch(result){
-            case 0 -> System.out.println("Vehicle returned successfully!");
-            case 1 -> System.out.println("Vehicle not found!");
-            case 2 -> System.out.println("Vehicle was not rented.");
+            case RentalFunctions.SUCCESS -> System.out.println("Vehicle returned successfully!");
+            case RentalFunctions.NOT_FOUND -> System.out.println("Vehicle not found!");
+            case RentalFunctions.NOT_RENTED -> System.out.println("Vehicle was not rented.");
         }
     }
 }

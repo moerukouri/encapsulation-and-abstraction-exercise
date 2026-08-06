@@ -2,11 +2,10 @@ import java.util.*;
 
 public class RentalFunctions{
     private final List<Vehicle> vehicles = new ArrayList<>();
-    private final List<Vehicle> rentalRecords = new ArrayList<>();
     public static final int SUCCESS = 0;
     public static final int NOT_FOUND = 1;
     public static final int NOT_AVAILABLE = 2;
-    public static final int NOT_RENTED = 2;
+    public static final int NOT_RENTED = 3;
 
     public boolean isDuplicatePlate(String plateNumber){return findVehicle(plateNumber) != null;}
 
@@ -52,7 +51,7 @@ public class RentalFunctions{
         }
     }
 
-    public int rentVehicle(String plateNumber, int days){
+    public int rentVehicle(String plateNumber){
         Vehicle vehicle = findVehicle(plateNumber);
         if (vehicle == null) {
             return NOT_FOUND;
@@ -61,7 +60,6 @@ public class RentalFunctions{
             return NOT_AVAILABLE;
         }
         vehicle.setAvailability(false);
-        rentalRecords.add(vehicle);
         return SUCCESS;
     }
 
@@ -74,7 +72,6 @@ public class RentalFunctions{
             return NOT_RENTED;
         }
         vehicle.setAvailability(true);
-        rentalRecords.remove(vehicle);
         return SUCCESS;
     }
 
@@ -82,16 +79,19 @@ public class RentalFunctions{
         return String.format("₱%,.2f", amount);
     }
 
-    public List<Vehicle> getRentalRecords() {
-        return rentalRecords;
-    }
-
-    public List<Vehicle> getAvailableVehicles() {
+    public List<Vehicle> getAvailableVehicles(boolean rented) {
         List<Vehicle> availableVehicles = new ArrayList<>();
+        List<Vehicle> rentedVehicles = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
             if (vehicle.isAvailable()) {
                 availableVehicles.add(vehicle);
             }
+            else {
+                rentedVehicles.add(vehicle);
+            }
+        }
+        if (rented) {
+            return rentedVehicles;
         }
         return availableVehicles;
     }

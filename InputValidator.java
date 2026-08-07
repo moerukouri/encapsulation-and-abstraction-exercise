@@ -54,8 +54,8 @@ public class InputValidator {
         System.out.print("Enter base rate per day: ");
         String input = sc.nextLine().trim();
 
-        while (!isValidPositiveDecimal(input)) {
-            System.out.println("Invalid rate. Please enter a positive number.");
+        while (!isValidPositiveDecimal(input) || !input.matches("^[0-9]+(\\.[0-9]{1,2})?$")) {
+            System.out.println("Invalid rate. Please enter a positive number with at most two decimal places.");
             System.out.print("Enter base rate per day: ");
             input = sc.nextLine().trim();
         }
@@ -111,13 +111,11 @@ public class InputValidator {
     }
 
     public int getValidatedChoice(int low, int high){
-        String prompt = "Enter your choice: ";
-        String errorMsg = "Invalid choice. Enter a whole number from "+low+"-"+high+".";
-        System.out.print(prompt);
+        System.out.print("Enter your choice: ");
         String input = sc.nextLine().trim();
         while(!isValidPositiveInteger(String.valueOf(input)) || Integer.parseInt(input) < low || Integer.parseInt(input) > high){
-            System.out.println(errorMsg);
-            System.out.print(prompt);
+            System.out.println("Invalid choice. Enter a whole number from "+low+"-"+high+".");
+            System.out.print("Enter your choice: ");
             input = sc.nextLine().trim();
         }
         return Integer.parseInt(input);

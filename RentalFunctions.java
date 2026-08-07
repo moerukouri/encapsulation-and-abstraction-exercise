@@ -79,20 +79,23 @@ public class RentalFunctions{
         return String.format("P%,.2f", amount);
     }
 
-    public List<Vehicle> getAvailableVehicles(boolean rented) {
+    public List<Vehicle> getAvailableVehicles() {
         List<Vehicle> availableVehicles = new ArrayList<>();
-        List<Vehicle> rentedVehicles = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
             if (vehicle.isAvailable()) {
                 availableVehicles.add(vehicle);
             }
-            else {
+        }
+        return availableVehicles;
+    }
+
+    public List<Vehicle> getRentedVehicles() {
+        List<Vehicle> rentedVehicles = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            if (!vehicle.isAvailable()) {
                 rentedVehicles.add(vehicle);
             }
         }
-        if (rented) {
-            return rentedVehicles;
-        }
-        return availableVehicles;
+        return rentedVehicles;
     }
 }

@@ -24,8 +24,12 @@ public class VehicleRentalSystem{
                 case 2 -> userInterface.viewAllVehicles();
                 case 3 -> userInterface.rentVehicle();
                 case 4 -> userInterface.returnVehicle();
-                case 5 -> running = false;
+                case 5 -> {
+                    System.out.println("Exiting Vehicle Rental System. . .");
+                    running = false;
+                }
                 default -> {
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
                 }
             }
         }

@@ -61,7 +61,7 @@ public class UserInterface{
             System.out.println("No vehicles registered yet.");
             return;
         }
-        if(rentalFunctions.getAvailableVehicles().isEmpty()){
+        if(!rentalFunctions.hasVehicleWithStatus(true)){
             System.out.println("No vehicles available for rent.");
             return;
         }
@@ -86,7 +86,7 @@ public class UserInterface{
             System.out.println("No vehicles registered yet.");
             return;
         }
-        if(rentalFunctions.getRentedVehicles().isEmpty()){
+        if(!rentalFunctions.hasVehicleWithStatus(false)){
             System.out.println("No vehicles are currently rented.");
             return;
         }

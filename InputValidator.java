@@ -63,36 +63,36 @@ public class InputValidator {
     }
 
     public int getValidatedSeats() {
-        System.out.print("Enter number of seats (" + MAX_SEATS + "): ");
+        System.out.print("Enter number of seats (Maximum: " + MAX_SEATS + "): ");
         String input = sc.nextLine().trim();
 
         while (!isValidPositiveInteger(input) || Integer.parseInt(input) > MAX_SEATS) {
-            System.out.println("Invalid number of seats. Please enter a valid number of seats (" + MAX_SEATS + ").");
-            System.out.print("Enter number of seats (" + MAX_SEATS + "): ");
+            System.out.println("Invalid number of seats. Please enter a valid number of seats (Maximum: " + MAX_SEATS + ").");
+            System.out.print("Enter number of seats (Maximum: " + MAX_SEATS + "): ");
             input = sc.nextLine().trim();
         }
         return Integer.parseInt(input);
     }
 
     public int getValidatedEngineDisplacement() {
-        System.out.print("Enter engine displacement (" + MAX_ENGINE_DISPLACEMENT + " cc): ");
+        System.out.print("Enter engine displacement in cc (Maximum: " + MAX_ENGINE_DISPLACEMENT + " cc): ");
         String input = sc.nextLine().trim();
 
         while (!isValidPositiveInteger(input) || Integer.parseInt(input) > MAX_ENGINE_DISPLACEMENT) {
-            System.out.println("Invalid engine displacement. Please enter a valid engine displacement (" + MAX_ENGINE_DISPLACEMENT + ").");
-            System.out.print("Enter engine displacement (" + MAX_ENGINE_DISPLACEMENT + " cc): ");
+            System.out.println("Invalid engine displacement. Please enter a valid engine displacement (Maximum: " + MAX_ENGINE_DISPLACEMENT + " cc).");
+            System.out.print("Enter engine displacement in cc (Maximum: " + MAX_ENGINE_DISPLACEMENT + " cc): ");
             input = sc.nextLine().trim();
         }
         return Integer.parseInt(input);
     }
 
     public int getValidatedCargoCapacity() {
-        System.out.print("Enter cargo capacity (" + MAX_CARGO_CAPACITY + " kg): ");
+        System.out.print("Enter cargo capacity in kg (Maximum: " + MAX_CARGO_CAPACITY + "kg): ");
         String input = sc.nextLine().trim();
 
         while (!isValidPositiveInteger(input) || Integer.parseInt(input) > MAX_CARGO_CAPACITY) {
-            System.out.println("Invalid cargo capacity. Please enter a valid cargo capacity (" + MAX_CARGO_CAPACITY + ").");
-            System.out.print("Enter cargo capacity (" + MAX_CARGO_CAPACITY + " kg): ");
+            System.out.println("Invalid cargo capacity. Please enter a valid cargo capacity (Maximum: " + MAX_CARGO_CAPACITY + "kg).");
+            System.out.print("Enter cargo capacity in kg (Maximum: " + MAX_CARGO_CAPACITY + "kg): ");
             input = sc.nextLine().trim();
         }
         return Integer.parseInt(input);

@@ -76,7 +76,7 @@ public class RentalFunctions{
     }
 
     public static String formatPesos(double amount){
-        return String.format("₱%,.2f", amount);
+        return String.format("P%,.2f", amount);
     }
 
     public List<Vehicle> getAvailableVehicles(boolean rented) {

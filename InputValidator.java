@@ -117,11 +117,11 @@ public class InputValidator {
         String prompt = "Enter your choice: ";
         String errorMsg = "Invalid choice. Enter a whole number from "+low+"-"+high+".";
         System.out.print(prompt);
-        int input = Integer.parseInt(sc.nextLine().trim());
-        while(!isValidPositiveInteger(String.valueOf(input)) || input < low || input > high){
+        String input = sc.nextLine().trim();
+        while(!isValidPositiveInteger(String.valueOf(input)) || Integer.parseInt(input) < low || Integer.parseInt(input) > high){
             System.out.println(errorMsg);
-            input = Integer.parseInt(sc.nextLine().trim());
+            input = sc.nextLine().trim();
         }
-        return input;
+        return Integer.parseInt(input);
     }
 }

@@ -120,6 +120,7 @@ public class InputValidator {
         String input = sc.nextLine().trim();
         while(!isValidPositiveInteger(String.valueOf(input)) || Integer.parseInt(input) < low || Integer.parseInt(input) > high){
             System.out.println(errorMsg);
+            System.out.print(prompt);
             input = sc.nextLine().trim();
         }
         return Integer.parseInt(input);

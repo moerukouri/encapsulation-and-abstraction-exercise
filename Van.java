@@ -8,6 +8,7 @@ public class Van extends Vehicle {
     }
 
     public int getCargoCapacity(){return cargoCapacity;}
+    public double getDriverFee(){return DRIVER_FEE;}
 
     @Override
     public String getVehicleType(){return "Van";}

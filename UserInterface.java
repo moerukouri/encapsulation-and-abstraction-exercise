@@ -74,6 +74,11 @@ public class UserInterface{
             case RentalFunctions.SUCCESS -> {
                 Vehicle vehicle = rentalFunctions.findVehicle(plateNumber);
                 double cost = vehicle.calculateRentalCost(days);
+                if (vehicle instanceof Van van) {
+                    double baseCost = cost - van.getDriverFee();
+                    System.out.println("Base rental cost: " + RentalFunctions.formatPesos(baseCost));
+                    System.out.println("Driver fee: " + RentalFunctions.formatPesos(van.getDriverFee()));
+                }
                 System.out.println("Total rental cost: " + RentalFunctions.formatPesos(cost));
             }
             case RentalFunctions.NOT_FOUND -> System.out.println("Vehicle not found!");

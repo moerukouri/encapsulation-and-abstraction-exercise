@@ -24,9 +24,9 @@ public abstract class Vehicle{
     public abstract double calculateRentalCost(int days);
     public abstract String getAdditionalDetail();
 
-    public String toTableRow(int vehicleTypeWidth, int modelWidth, int plateNumberWidth, int additionalDetailWidth, int rateWidth, int statusWidth){
+    public String toTableRow(int vehicleTypeWidth, int plateNumberWidth, int modelWidth, int additionalDetailWidth, int rateWidth, int statusWidth){
         String status = getStatus();
-        String format = "%-" + vehicleTypeWidth + "s | %-" + plateNumberWidth + "s | %-" + modelWidth + "s | %-" + additionalDetailWidth + "s | P%-" + rateWidth + ",.2f | %-" + statusWidth + "s";
+        String format = "%-" + vehicleTypeWidth + "s | %-" + plateNumberWidth + "s | %-" + modelWidth + "s | %-" + additionalDetailWidth + "s | P%-," + rateWidth + ".2f | %-" + statusWidth + "s";
         return String.format(format, getVehicleType(), plateNumber, model, getAdditionalDetail(), rate, status);
     }
 }

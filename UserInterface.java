@@ -15,46 +15,29 @@ public class UserInterface{
             return;
         }
 
-        String plateNumber = validator.getValidatedString(
-            "Enter Plate Number: ", 
-            "^[A-Za-z0-9]+", 
-            "Invalid plate number. Enter letters and numbers only, no spaces.");
+        String plateNumber = validator.getValidatedPlateNumber();
 
         while(rentalFunctions.isDuplicatePlate(plateNumber)){
             System.out.println("Vehicle with that plate number already exists. Try again.");
-            plateNumber = validator.getValidatedString(
-                "Enter Plate Number: ", 
-                "^[A-Za-z0-9]+", 
-                "Invalid plate number. Use letters and numbers only, no spaces.");
+            plateNumber = validator.getValidatedPlateNumber();
         }
 
-        String model = validator.getValidatedString(
-            "Enter Model: ", 
-            "\\S.+", 
-            "Model cannot be empty.");
+        String model = validator.getValidatedModel();
 
-        double rate = Double.parseDouble(validator.getValidatedPositiveDecimal(
-            "Enter base rate per day: ", 
-            "Invalid rate. Enter a positive number."));
+        double rate = validator.getValidatedRate();
 
         Vehicle vehicle;
         switch (typeChoice){
             case 1 -> { 
-                int seats = Integer.parseInt(validator.getValidatedPositiveInteger(
-                        "Enter Number of Seats: ",
-                        "Invalid seats. Enter a positive whole number."));
+                int seats = validator.getValidatedSeats();
                 vehicle = new Car(plateNumber, model, rate, seats);
             }
             case 2 -> {
-                int cc = Integer.parseInt(validator.getValidatedPositiveInteger(
-                        "Enter Engine Displacement (cc): ",
-                        "Invalid engine displacement. Enter a positive whole number."));
+                int cc = validator.getValidatedEngineDisplacement();
                 vehicle = new Motorcycle(plateNumber, model, rate, cc);
             }
             case 3 -> {
-                int capacity = Integer.parseInt(validator.getValidatedPositiveInteger(
-                        "Enter Cargo Capacity (kg): ",
-                        "Invalid cargo capacity. Enter a positive whole number."));
+                int capacity = validator.getValidatedCargoCapacity();
                 vehicle = new Van(plateNumber, model, rate, capacity);
             }
             default -> {
@@ -82,13 +65,8 @@ public class UserInterface{
             System.out.println("No vehicles available for rent.");
             return;
         }
-        String plateNumber = validator.getValidatedString(
-            "Enter Plate Number: ", 
-            "^[A-Za-z0-9]+",
-            "Invalid plate number. Enter letters or numbers only, no spaces.");
-        int days = Integer.parseInt(validator.getValidatedPositiveInteger(
-            "Enter Number of Rental Days: ",
-            "Invalid number of days. Enter a positive whole number."));
+        String plateNumber = validator.getValidatedPlateNumber();
+        int days = validator.getValidatedRentalDays();
 
         int result = rentalFunctions.rentVehicle(plateNumber);
 
@@ -108,11 +86,7 @@ public class UserInterface{
             System.out.println("No vehicles are currently rented.");
             return;
         }
-        String plateNumber = validator.getValidatedString(
-            "Enter Plate Number: ", 
-            "^[A-Za-z0-9]+",
-            "Invalid plate number. Enter letters or numbers only, no spaces.");
-
+        String plateNumber = validator.getValidatedPlateNumber();
         int result = rentalFunctions.returnVehicle(plateNumber);
 
         switch(result){

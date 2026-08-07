@@ -2,43 +2,15 @@ import java.util.Scanner;
 
 public class InputValidator {
     private final Scanner sc;
+    private final int MAX_SEATS = 8;
+    private final int MIN_SEATS = 1;
+    private final int MIN_ENGINE_DISPLACEMENT = 50;
+    private final int MAX_ENGINE_DISPLACEMENT = 2500;
+    private final int MIN_CARGO_CAPACITY = 500;
+    private final int MAX_CARGO_CAPACITY = 2000;
 
     public InputValidator() {
         this.sc = new Scanner(System.in);
-    }
-
-    public String getValidatedString(String prompt, String regex, String errorMsg) {
-        System.out.print(prompt);
-        String input = sc.nextLine().trim();
-
-        while (!input.matches(regex)) {
-            System.out.println(errorMsg);
-            System.out.print(prompt);
-            input = sc.nextLine().trim();
-            }
-        return input;
-    }
-
-    public String getValidatedPositiveInteger(String prompt, String errorMsg){
-        System.out.print(prompt);
-        String input = sc.nextLine().trim();
-        while(!isValidPositiveInteger(input)){
-            System.out.println(errorMsg);
-            System.out.print(prompt);
-            input = sc.nextLine().trim();
-        }
-        return input;
-    }
-
-    public String getValidatedPositiveDecimal(String prompt, String errorMsg){
-        System.out.print(prompt);
-        String input = sc.nextLine().trim();
-        while(!isValidPositiveDecimal(input)){
-            System.out.println(errorMsg);
-            System.out.print(prompt);
-            input = sc.nextLine().trim();
-        }
-        return input;
     }
 
     public boolean isValidPositiveInteger(String input){
@@ -57,13 +29,98 @@ public class InputValidator {
         }
     }
 
+    public String getValidatedPlateNumber() {
+        System.out.print("Enter plate number: ");
+        String input = sc.nextLine().trim();
+
+        while (!input.matches("^[A-Za-z0-9]{6,7}$")) {
+            System.out.println("Invalid plate number. Please enter a valid plate number (6-7 letters and numbers).");
+            System.out.print("Enter plate number: ");
+            input = sc.nextLine().trim();
+        }
+        return input;
+    }
+
+    public String getValidatedModel() {
+        System.out.print("Enter model: ");
+        String input = sc.nextLine().trim();
+
+        while (input.isEmpty()) {
+            System.out.println("Invalid model. Please enter a valid model.");
+            System.out.print("Enter model: ");
+            input = sc.nextLine().trim();
+        }
+        return input;
+    }
+
+    public double getValidatedRate() {
+        System.out.print("Enter base rate per day: ");
+        String input = sc.nextLine().trim();
+
+        while (!isValidPositiveDecimal(input)) {
+            System.out.println("Invalid rate. Please enter a positive number.");
+            System.out.print("Enter base rate per day: ");
+            input = sc.nextLine().trim();
+        }
+        return Double.parseDouble(input);
+    }
+
+    public int getValidatedSeats() {
+        System.out.print("Enter number of seats: ");
+        String input = sc.nextLine().trim();
+
+        while (!isValidPositiveInteger(input) || Integer.parseInt(input) < MIN_SEATS || Integer.parseInt(input) > MAX_SEATS) {
+            System.out.println("Invalid number of seats. Please enter a valid number of seats (" + MIN_SEATS + "-" + MAX_SEATS + ").");
+            System.out.print("Enter number of seats: ");
+            input = sc.nextLine().trim();
+        }
+        return Integer.parseInt(input);
+    }
+
+    public int getValidatedEngineDisplacement() {
+        System.out.print("Enter engine displacement (cc): ");
+        String input = sc.nextLine().trim();
+
+        while (!isValidPositiveInteger(input) || Integer.parseInt(input) < MIN_ENGINE_DISPLACEMENT || Integer.parseInt(input) > MAX_ENGINE_DISPLACEMENT) {
+            System.out.println("Invalid engine displacement. Please enter a valid engine displacement (" + MIN_ENGINE_DISPLACEMENT + "-" + MAX_ENGINE_DISPLACEMENT + ").");
+            System.out.print("Enter engine displacement (cc): ");
+            input = sc.nextLine().trim();
+        }
+        return Integer.parseInt(input);
+    }
+
+    public int getValidatedCargoCapacity() {
+        System.out.print("Enter cargo capacity (kg): ");
+        String input = sc.nextLine().trim();
+
+        while (!isValidPositiveInteger(input) || Integer.parseInt(input) < MIN_CARGO_CAPACITY || Integer.parseInt(input) > MAX_CARGO_CAPACITY) {
+            System.out.println("Invalid cargo capacity. Please enter a valid cargo capacity (" + MIN_CARGO_CAPACITY + "-" + MAX_CARGO_CAPACITY + ").");
+            System.out.print("Enter cargo capacity (kg): ");
+            input = sc.nextLine().trim();
+        }
+        return Integer.parseInt(input);
+    }
+
+    public int getValidatedRentalDays() {
+        System.out.print("Enter number of rental days: ");
+        String input = sc.nextLine().trim();
+
+        while (!isValidPositiveInteger(input)) {
+            System.out.println("Invalid number of days. Please enter a positive whole number.");
+            System.out.print("Enter number of rental days: ");
+            input = sc.nextLine().trim();
+        }
+        return Integer.parseInt(input);
+    }
+
     public int getValidatedChoice(int low, int high){
         String prompt = "Enter your choice: ";
         String errorMsg = "Invalid choice. Enter a whole number from "+low+"-"+high+".";
-        int input = Integer.parseInt(getValidatedPositiveInteger(prompt, errorMsg));
-        while(input < low || input > high){
+        System.out.print(prompt);
+        int input = Integer.parseInt(sc.nextLine().trim());
+        while(!isValidPositiveInteger(String.valueOf(input)) || input < low || input > high){
             System.out.println(errorMsg);
-            input = Integer.parseInt(getValidatedPositiveInteger(prompt, errorMsg));
+            input = Integer.parseInt(sc.nextLine().trim());
         }
         return input;
     }

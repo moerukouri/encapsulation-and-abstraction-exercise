@@ -42,12 +42,12 @@ public class RentalFunctions{
             statusWidth = Math.max(statusWidth, vehicle.getStatus().length());
         }
 
-        String headerFormat = "%-" + vehicleTypeWidth + "s | %-" + modelWidth + "s | %-" + plateNumberWidth + "s | %-" + additionalDetailWidth + "s | %-" + rateWidth + "s | %-" + statusWidth + "s";
-        String header = String.format(headerFormat, "Type", "Model", "Plate Number", "Additional Detail", "Base Rate", "Status");
+        String headerFormat = "%-" + vehicleTypeWidth + "s | %-" + plateNumberWidth + "s | %-" + modelWidth + "s | %-" + additionalDetailWidth + "s | %-" + rateWidth + "s | %-" + statusWidth + "s";
+        String header = String.format(headerFormat, "Type", "Plate Number", "Model", "Additional Detail", "Base Rate", "Status");
         System.out.println(header);
         System.out.println("-".repeat(header.length()));
         for(Vehicle vehicle : vehicles){
-            System.out.println(vehicle.toTableRow(vehicleTypeWidth, modelWidth, plateNumberWidth, additionalDetailWidth, rateWidth, statusWidth));
+            System.out.println(vehicle.toTableRow(vehicleTypeWidth, plateNumberWidth, modelWidth, additionalDetailWidth, rateWidth, statusWidth));
         }
     }
 
